@@ -32,7 +32,7 @@ export const navItems: NavItem[] = [
   { title: "Thanh toán", href: "/payments", icon: CreditCard, enabled: true },
   { title: "Đồng hồ nước", href: "/meters", icon: Droplet, enabled: true },
   { title: "Hợp đồng", href: "/contracts", icon: FileText, enabled: true },
-  { title: "Phản ánh sự cố", href: "/tickets", icon: Ticket, enabled: true },
+  { title: "Phản ánh sự cố", href: "/incidents/reports", icon: Ticket, enabled: true },
   { title: "Hỗ trợ & FAQ", href: "/knowledge-base", icon: HelpCircle, enabled: true },
   { title: "Thông báo", href: "/notifications", icon: Bell, enabled: true },
   { title: "Phiên tương tác", href: "/sessions", icon: History, enabled: true },

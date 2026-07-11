@@ -13,12 +13,15 @@ import { phoneNumberClient } from "better-auth/client/plugins";
  *
  * Mirrors the backend better-auth setup (better-auth ^1.6.14, phoneNumber plugin).
  */
+// Dynamic baseURL: client uses the browser's origin (works for localhost, tunnel,
+// production); server (SSR/prerender) uses localhost (better-auth requires absolute).
 const AUTH_BASE_URL =
-  process.env.NEXT_PUBLIC_APP_ORIGIN?.replace(/\/$/, "") ??
-  "http://localhost:3001";
+  typeof window !== "undefined"
+    ? `${window.location.origin}/api/auth`
+    : `${process.env.NEXT_PUBLIC_APP_ORIGIN?.replace(/\/$/, "") ?? "http://localhost:3001"}/api/auth`;
 
 export const authClient = createAuthClient({
-  baseURL: `${AUTH_BASE_URL}/api/auth`,
+  baseURL: AUTH_BASE_URL,
   fetchOptions: {
     credentials: "include",
   },

@@ -5,6 +5,7 @@ import { Droplet, ShieldCheck } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { usePhoneLogin } from "@/features/auth/hooks";
 import { useSession } from "@/lib/auth-client";
+import { apiClient } from "@/lib/api-client";
 
 // Local VN mobile digits WITHOUT the leading 0 — the +84 prefix is fixed in the UI.
 const LOCAL_PHONE_RE = /^\d{9,10}$/;
@@ -18,7 +19,26 @@ export default function LoginPage() {
   const [secondsLeft, setSecondsLeft] = useState(0);
 
   useEffect(() => {
-    if (session) window.location.replace("/dashboard");
+    if (!session) return;
+    const linked = typeof window !== "undefined" && localStorage.getItem("linked-kh");
+    if (linked) {
+      window.location.replace("/dashboard");
+      return;
+    }
+    // Auto-match with Customer 360 by phone
+    apiClient
+      .post<{ matched: boolean; customer?: { customerId?: string } }>("/auth/link-customer", {
+        phone: `+84${phone}`,
+      })
+      .then((result) => {
+        if (result?.matched) {
+          localStorage.setItem("linked-kh", result.customer?.customerId ?? "matched");
+          window.location.replace("/dashboard");
+        } else {
+          window.location.replace("/link-kh");
+        }
+      })
+      .catch(() => window.location.replace("/link-kh"));
   }, [session]);
 
   useEffect(() => {

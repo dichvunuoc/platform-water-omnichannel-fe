@@ -79,7 +79,7 @@ export default function HomePage() {
       {/* Quick actions */}
       <div className="relative z-10 -mt-10 grid grid-cols-4 gap-2.5 px-4">
         <QuickAction href="/payments" icon={CreditCard} label="Thanh toán" />
-        <QuickAction href="/tickets" icon={Siren} label="Báo sự cố" />
+        <QuickAction href="/incidents/reports" icon={Siren} label="Báo sự cố" />
         <QuickAction href="/invoices" icon={ReceiptText} label="Tra hóa đơn" />
         <QuickAction href="/contact" icon={Headset} label="Hỗ trợ" />
       </div>

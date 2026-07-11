@@ -9,7 +9,7 @@ const items = [
   { href: "/dashboard", label: "Trang chủ", icon: Home, match: ["/dashboard", "/"] },
   { href: "/invoices", label: "Hóa đơn", icon: ReceiptText, match: ["/invoices"] },
   { href: "/meters", label: "Tiêu thụ", icon: Droplet, match: ["/meters"] },
-  { href: "/tickets", label: "Sự cố", icon: Siren, match: ["/tickets"] },
+  { href: "/incidents/reports", label: "Sự cố", icon: Siren, match: ["/incidents"] },
   { href: "/profile", label: "Tài khoản", icon: UserRound, match: ["/profile"] },
 ] as const;
 
